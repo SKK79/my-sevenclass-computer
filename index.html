@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💻 Grade 7 Computer Science</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#222;min-height:100vh}
+/* HERO */
+.hero{background:linear-gradient(135deg,#0d1b6e,#1565c0,#1a237e,#311b92);color:#fff;padding:50px 24px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-emoji{font-size:56px;display:block;margin-bottom:12px;position:relative}
+.hero h1{font-size:2.2rem;font-weight:900;letter-spacing:-0.5px;text-shadow:0 2px 8px rgba(0,0,0,.3);position:relative}
+.hero-sub{font-size:1rem;opacity:.85;margin-top:8px;font-weight:500;position:relative}
+.hero-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;position:relative}
+.badge{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:20px;padding:5px 16px;font-size:13px;font-weight:700;backdrop-filter:blur(4px)}
+/* SEARCH */
+.search-wrap{max-width:500px;margin:28px auto 0;position:relative}
+.search-wrap input{width:100%;padding:13px 20px 13px 46px;border-radius:30px;border:none;font-size:14px;font-weight:600;color:#1a237e;box-shadow:0 4px 16px rgba(0,0,0,.15);outline:none}
+.search-wrap input:focus{box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:18px}
+/* GRID */
+.grid-wrap{max-width:900px;margin:32px auto;padding:0 16px}
+.grid-title{font-size:1.1rem;font-weight:800;color:#1a237e;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+/* CARD */
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);transition:all .25s;border:2px solid transparent}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.13)}
+.card.unlocked{border-color:#1565c0}
+.card.locked{opacity:.7;filter:grayscale(.4)}
+.card-top{padding:20px 20px 14px;display:flex;align-items:center;gap:14px}
+.card-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.card-meta{flex:1}
+.card-chapter{font-size:11px;font-weight:800;color:#90a4ae;text-transform:uppercase;letter-spacing:.5px}
+.card-title{font-size:1rem;font-weight:800;color:#1a237e;margin-top:2px;line-height:1.3}
+.card-body{padding:0 20px 16px;font-size:13px;color:#546e7a;line-height:1.6}
+.card-footer{padding:12px 20px;border-top:1px solid #f0f4f8;display:flex;align-items:center;justify-content:space-between}
+.live-tag{background:#e8f5e9;color:#2e7d32;font-size:11px;font-weight:800;padding:4px 10px;border-radius:10px;display:flex;align-items:center;gap:4px}
+.coming-tag{background:#fff3e0;color:#e65100;font-size:11px;font-weight:800;padding:4px 10px;border-radius:10px}
+.open-btn{background:linear-gradient(135deg,#1565c0,#1a237e);color:#fff;padding:8px 18px;border-radius:10px;font-size:13px;font-weight:800;text-decoration:none;transition:all .2s;display:inline-block}
+.open-btn:hover{background:linear-gradient(135deg,#1976d2,#283593);box-shadow:0 4px 12px rgba(21,101,192,.4)}
+.locked-btn{background:#cfd8dc;color:#607d8b;padding:8px 18px;border-radius:10px;font-size:13px;font-weight:800;cursor:not-allowed;display:inline-block}
+/* FOOTER */
+footer{text-align:center;padding:32px 16px;color:#90a4ae;font-size:13px;font-weight:600}
+footer span{color:#1565c0;font-weight:800}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-emoji">💻</span>
+  <h1>Grade 7 Computer Science</h1>
+  <div class="hero-sub">Interactive Worksheets · Auto-Scored · Google Sheets Linked</div>
+  <div class="hero-badges">
+    <span class="badge">📘 Grade 7</span>
+    <span class="badge">🏫 SKK79</span>
+    <span class="badge">📤 Google Sheets</span>
+    <span class="badge">⚡ Auto-Scored</span>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchBox" placeholder="Search chapters…" oninput="filterCards()">
+  </div>
+</div>
+
+<div class="grid-wrap">
+  <div class="grid-title">📂 All Chapters</div>
+  <div class="grid" id="cardGrid">
+
+    <!-- CHAPTER 1 — LIVE -->
+    <div class="card unlocked" data-title="Computer Fundamentals">
+      <div class="card-top">
+        <div class="card-icon" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)">💻</div>
+        <div class="card-meta">
+          <div class="card-chapter">Chapter 1</div>
+          <div class="card-title">Computer Fundamentals</div>
+        </div>
+      </div>
+      <div class="card-body">Speed, Accuracy, Automation, Diligence & Versatility. Capabilities vs. Limitations. Modern Impact.</div>
+      <div class="card-footer">
+        <span class="live-tag">✅ Live</span>
+        <a class="open-btn" href="https://skk79.github.io/my-sevenclass-computer/computer-fundamentals.html" target="_blank">📂 Open</a>
+      </div>
+    </div>
+
+    <!-- CHAPTER 2 — COMING SOON -->
+    <div class="card locked" data-title="Hardware">
+      <div class="card-top">
+        <div class="card-icon" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)">🖥️</div>
+        <div class="card-meta">
+          <div class="card-chapter">Chapter 2</div>
+          <div class="card-title">Computer Hardware</div>
+        </div>
+      </div>
+      <div class="card-body">Input, Output, Processing & Storage devices. CPU components and their functions.</div>
+      <div class="card-footer">
+        <span class="coming-tag">🔒 Coming Soon</span>
+        <span class="locked-btn">🔒 Locked</span>
+      </div>
+    </div>
+
+    <!-- CHAPTER 3 — COMING SOON -->
+    <div class="card locked" data-title="Software">
+      <div class="card-top">
+        <div class="card-icon" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)">💾</div>
+        <div class="card-meta">
+          <div class="card-chapter">Chapter 3</div>
+          <div class="card-title">Computer Software</div>
+        </div>
+      </div>
+      <div class="card-body">System software vs. Application software. Operating systems and their functions.</div>
+      <div class="card-footer">
+        <span class="coming-tag">🔒 Coming Soon</span>
+        <span class="locked-btn">🔒 Locked</span>
+      </div>
+    </div>
+
+    <!-- CHAPTER 4 — COMING SOON -->
+    <div class="card locked" data-title="Internet">
+      <div class="card-top">
+        <div class="card-icon" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)">🌐</div>
+        <div class="card-meta">
+          <div class="card-chapter">Chapter 4</div>
+          <div class="card-title">Internet & Networking</div>
+        </div>
+      </div>
+      <div class="card-body">How the Internet works. WWW, browsers, email, and online safety basics.</div>
+      <div class="card-footer">
+        <span class="coming-tag">🔒 Coming Soon</span>
+        <span class="locked-btn">🔒 Locked</span>
+      </div>
+    </div>
+
+    <!-- CHAPTER 5 — COMING SOON -->
+    <div class="card locked" data-title="Multimedia">
+      <div class="card-top">
+        <div class="card-icon" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)">🎨</div>
+        <div class="card-meta">
+          <div class="card-chapter">Chapter 5</div>
+          <div class="card-title">Multimedia</div>
+        </div>
+      </div>
+      <div class="card-body">Text, images, audio, video and animation. Uses of multimedia in education and entertainment.</div>
+      <div class="card-footer">
+        <span class="coming-tag">🔒 Coming Soon</span>
+        <span class="locked-btn">🔒 Locked</span>
+      </div>
+    </div>
+
+    <!-- CHAPTER 6 — COMING SOON -->
+    <div class="card locked" data-title="Programming">
+      <div class="card-top">
+        <div class="card-icon" style="background:linear-gradient(135deg,#e8eaf6,#c5cae9)">🧑‍💻</div>
+        <div class="card-meta">
+          <div class="card-chapter">Chapter 6</div>
+          <div class="card-title">Introduction to Programming</div>
+        </div>
+      </div>
+      <div class="card-body">Algorithms, flowcharts and basic programming concepts. Introduction to Scratch or Logo.</div>
+      <div class="card-footer">
+        <span class="coming-tag">🔒 Coming Soon</span>
+        <span class="locked-btn">🔒 Locked</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Built with ❤️ for <span>Grade 7 Students</span> · SKK79 · Google Sheets Linked
+</footer>
+
+<script>
+function filterCards(){
+  const q=document.getElementById('searchBox').value.toLowerCase();
+  document.querySelectorAll('.card').forEach(c=>{
+    const t=c.dataset.title.toLowerCase();
+    c.style.display=t.includes(q)?'':'none';
+  });
+}
+</script>
+</body>
+</html>
